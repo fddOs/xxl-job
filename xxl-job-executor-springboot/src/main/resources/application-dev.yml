@@ -1,0 +1,51 @@
+server:
+  port: 8081
+  #context-path: /xxl
+
+  
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.example.entity
+  
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/nrl?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: 123456
+      initial-size: 2
+      max-active: 10
+      min-idle: 2
+      filters: stat
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: admin
+        reset-enable: false
+        allow: 
+  jmx:
+    default-domain: xxl-job
+ 
+# log config
+logging:
+  config: classpath:logback.xml
+
+# xxl-job
+### xxl-job admin address list, such as "http://address" or "http://address01,http://address02"
+xxl: 
+  job:
+    admin:
+      addresses: http://127.0.0.1:8080/xxl-job-admin
+    executor:
+      appname: xxl-job-executor-springboot
+      ip: 127.0.0.1
+      port: 9999
+      logpath: /data/applogs/xxl-job/jobhandler/
+    accessToken: 
